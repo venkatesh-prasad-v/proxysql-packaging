@@ -70,13 +70,17 @@ else
 
 fi
 SOURCEDIR="$(cd $(dirname "$0"); cd ../../; pwd)"
-VERSION="$(grep CURVER $SOURCEDIR/Makefile | awk -F'=' '{print $2}')"
+VERSION="$(grep CURVER $SOURCEDIR/Makefile | awk -F'=' '{print $2}' | tr -d ' ')"
 
 # Compilation flags
 export CC=${CC:-gcc}
 export CXX=${CXX:-g++}
 export CFLAGS=-fpic
-export CXXFLAGS=' -std=c++11 -fpic'
+if [ -f /etc/debian_version ]; then
+    export CXXFLAGS=' -std=c++17 -fpic'
+else
+    export CXXFLAGS=' -std=c++11 -fpic'
+fi
 export MAKE_JFLAG=-j4
 
 # Create a temporary working directory
@@ -237,10 +241,9 @@ mkdir "$INSTALLDIR"
         done
         
         cd "$WORKDIR"
+        ls -la
 
-        $TAR czf "proxysql-$VERSION-$(uname -s)-$(uname -m)$GLIBC_VER.tar.gz" \
-            --owner=0 --group=0 -C "$INSTALLDIR/../" \
-            "proxysql-$VERSION-$(uname -s)-$(uname -m)$GLIBC_VER"
+        $TAR czf "proxysql-$VERSION-$(uname -s)-$(uname -m)$GLIBC_VER.tar.gz" --owner=0 --group=0 -C "$INSTALLDIR/../" "proxysql-$VERSION-$(uname -s)-$(uname -m)$GLIBC_VER"
     fi
 
     # Clean up build dir
