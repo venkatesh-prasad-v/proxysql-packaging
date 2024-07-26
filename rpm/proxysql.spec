@@ -149,10 +149,6 @@ exit 0
   fi
 %endif
 
-if [ -f /etc/proxysql-admin.cnf ]; then
-    rm -f /etc/proxysql-admin.cnf
-fi
-
 find /usr/share/proxysql -type d -empty -delete
 exit 0
 
