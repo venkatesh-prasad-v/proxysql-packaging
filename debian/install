@@ -14,3 +14,4 @@ pxc_scheduler_handler /usr/bin/
 percona-scheduler-admin /usr/bin/
 proxysql-logrotate /etc/logrotate.d/
 proxysql.service /lib/systemd/system/
+proxysql-initial.service /lib/systemd/system/

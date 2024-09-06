@@ -72,6 +72,7 @@ override_dh_auto_install:
 	cp tools/proxysql-logrotate $(TMP)/proxysql-logrotate
 	cp tools/proxysql-status $(TMP)/proxysql-status
 	cp debian/proxysql.service $(TMP)/proxysql.service
+	cp debian/proxysql-initial.service $(TMP)/proxysql-initial.service
 	cp tools/proxysql-admin-common $(TMP)/proxysql-admin-common
 	cp tools/proxysql-common $(TMP)/proxysql-common
 	cp tools/proxysql-login-file $(TMP)/proxysql-login-file

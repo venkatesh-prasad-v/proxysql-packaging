@@ -71,6 +71,7 @@ install -m 0640 %SOURCE3 %{buildroot}/%{_sysconfdir}
 %if 0%{?systemd}
   install -m 0755 -d %{buildroot}/%{_unitdir}
   install -m 0644 systemd/system/proxysql.service %{buildroot}/%{_unitdir}/proxysql.service
+  install -m 0644 systemd/system/proxysql-initial.service %{buildroot}/%{_unitdir}/proxysql-initial.service
 %else
   install -m 0755 -d %{buildroot}/etc/rc.d/init.d
   install -m 0755 etc/init.d/proxysql %{buildroot}/%{_sysconfdir}/init.d
@@ -178,6 +179,7 @@ exit 0
 %{_bindir}/proxysql
 %if 0%{?systemd}
 %{_unitdir}/proxysql.service
+%{_unitdir}/proxysql-initial.service
 %else
 %{_sysconfdir}/init.d/proxysql
 %endif
